@@ -1,0 +1,4 @@
+repository "LabirintGameCodingGiants/LabirintGameCodingGiants@6872087753806@cloud"
+  path "/"
+    br "/main"
+    co "/main"
