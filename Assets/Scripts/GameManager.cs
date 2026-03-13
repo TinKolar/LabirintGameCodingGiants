@@ -6,8 +6,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] int timeToEnd;
 
-    bool gamePaused = false;
+    public int points = 0;
 
+    public int redKey = 0;
+    public int greenKey = 0;
+    public int goldKey = 0;
+
+    bool gamePaused = false;
     bool endGame = false;
     bool win = false;
 
@@ -33,6 +38,40 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PauseCheck();
+        PickUpCheck();
+    }
+
+    public void AddKey(KeyColor color)
+    {
+        if (color == KeyColor.Gold)
+        {
+            goldKey++;
+        }
+        else if (color == KeyColor.Green)
+        {
+            greenKey++;
+        }
+        else if (color == KeyColor.Red)
+        {
+            redKey++;
+        }
+
+    }
+
+    public void AddPoints(int point)
+    {
+        points += point;
+    }
+
+    public void AddTime(int addTime)
+    {
+        timeToEnd += addTime;
+    }
+
+    public void FreezTime(int freezTime)
+    {
+        CancelInvoke("Stopper");
+        InvokeRepeating("Stopper", freezTime, 1);
     }
 
     void Stopper()
@@ -40,14 +79,15 @@ public class GameManager : MonoBehaviour
 
 
         timeToEnd--;
-        Debug.Log("Time: " + timeToEnd + " s");
+        //Debug.Log("Time: " + timeToEnd + " s");
         //Debug.Log($"Time: {timeToEnd} s");
 
-        if(timeToEnd <= 0){
+        if (timeToEnd <= 0)
+        {
             timeToEnd = 0;
             endGame = true;
         }
-        if (endGame) 
+        if (endGame)
         {
             EndGame();
         }
@@ -94,6 +134,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("YOU Loost!!!!");
 
+        }
+    }
+
+    void PickUpCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("Actual Time: " + timeToEnd);
+            Debug.Log("Key red: " + redKey + " green: " + greenKey + " gold: " + goldKey);
+            Debug.Log("Points: " + points);
         }
     }
 }
