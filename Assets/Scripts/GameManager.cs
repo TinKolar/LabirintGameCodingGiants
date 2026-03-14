@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class GameManager : MonoBehaviour
 
     bool endGame = false;
     bool win = false;
+
+    public int points = 0;
+    public int redKey = 0;
+    public int greenKey = 0;
+    public int goldKey = 0;
 
     void Start()
     {
@@ -33,6 +39,37 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PauseCheck();
+        PickUpCheck();
+    }
+
+    public void AddKey(KeyColor color)
+    {
+        if (color == KeyColor.Red)
+        {
+            redKey++;
+        }
+        else if (color == KeyColor.Green) 
+        {
+            greenKey++;
+        }
+        else if (color == KeyColor.Gold)
+        {
+            goldKey++;
+        }
+    }
+
+    public void AddPoints(int point)
+    {
+        points += point;
+    }
+    public void AddTime(int time)
+    {
+        timeToEnd += time;
+    }
+    public void FreezTime(int freez)
+    {
+        CancelInvoke("Stopper");
+        InvokeRepeating("Stopper",freez, 1);
     }
 
     void Stopper()
@@ -40,7 +77,7 @@ public class GameManager : MonoBehaviour
 
 
         timeToEnd--;
-        Debug.Log("Time: " + timeToEnd + " s");
+        //Debug.Log("Time: " + timeToEnd + " s");
         //Debug.Log($"Time: {timeToEnd} s");
 
         if(timeToEnd <= 0){
@@ -94,6 +131,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("YOU Loost!!!!");
 
+        }
+    }
+
+    void PickUpCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("Time to end: "+ timeToEnd);
+            Debug.Log("Key red: "+ redKey+" green: " + greenKey+" gold: "+ goldKey);
+            Debug.Log("points: " + points);
         }
     }
 }
