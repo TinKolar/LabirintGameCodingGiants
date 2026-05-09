@@ -194,6 +194,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6b66533a23ef7548b68d18847da077f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2175297700994191083}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6b66533a23ef7548b68d18847da077f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3735988626462355378}
   m_SourcePrefab: {fileID: 100100000, guid: b6b66533a23ef7548b68d18847da077f, type: 3}
 --- !u!4 &6041998726032889857 stripped
 Transform:
@@ -248,3 +251,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3735988626462355378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382354356271694523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4facf9819fdd4ab62056fe3f5f6c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lock
+  doors: []
+  myColor: 0
+  key: {fileID: 2175297700994191083}
