@@ -2863,7 +2863,7 @@ GameObject:
   - component: {fileID: 1542118366}
   - component: {fileID: 1542118365}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2955,7 +2955,7 @@ Transform:
   m_GameObject: {fileID: 1542118364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.985, y: 1.05684, z: 10.9067}
+  m_LocalPosition: {x: 3.9, y: 1.05684, z: 10.9067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2972,7 +2972,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 280326459097111512, guid: 8ae8b7dee49e0ef4182207affa598360, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7600017
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 280326459097111512, guid: 8ae8b7dee49e0ef4182207affa598360, type: 3}
       propertyPath: m_LocalPosition.y
