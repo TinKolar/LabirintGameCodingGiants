@@ -8,6 +8,9 @@ public class LevelGenerator : MonoBehaviour
     public ColorToPrefab[] colorMappings;
     public float offset = 5f;
 
+    public Material material01;
+    public Material material02;
+
     void GenerateTile(int x, int z)
     {
         Color pixelColor = map.GetPixel(x, z);
@@ -37,5 +40,26 @@ public class LevelGenerator : MonoBehaviour
                 GenerateTile(x, z);
             }
         }
+    }
+
+    public void ColorTheChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Wall")
+            {
+                if (Random.Range(1, 100) % 3 == 0)
+                {
+                    child.gameObject.GetComponent<Renderer>().material = material02;
+                }
+                else
+            {
+                    child.gameObject.GetComponent<Renderer>().material = material01;
+                }
+            }
+            // Here you can add a piece of code
+            // which will check if the wall has any children and give them materials this way too
+            // description below
+}
     }
 }
