@@ -18784,7 +18784,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 84cea3ce4ef2f6c4db4428f03a6adb5e, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 948c18bb58f112b45b233e1336fa4857, type: 2}
 --- !u!4 &988272227
 Transform:
   m_ObjectHideFlags: 0
@@ -31471,6 +31471,10 @@ PrefabInstance:
       propertyPath: volume
       value: 
       objectReference: {fileID: 988272226}
+    - target: {fileID: 923078935262292252, guid: 9e2c3904656ee7047a51596584dead2b, type: 3}
+      propertyPath: normalProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 948c18bb58f112b45b233e1336fa4857, type: 2}
     - target: {fileID: 4138467835239069090, guid: 9e2c3904656ee7047a51596584dead2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.71419
