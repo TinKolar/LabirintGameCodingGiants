@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Lock : MonoBehaviour
@@ -7,17 +8,46 @@ public class Lock : MonoBehaviour
     public KeyColor myColor;
     bool isLocked=false;
     public Animator key;
-    
 
-    bool iCanOpen=false;
+    public Material red;
+    public Material green;
+    public Material gold;
+
+
+    public Renderer myLock;
+
+    bool iCanOpen =false;
 
     void Start()
     {
         key = GetComponent<Animator>();
+        SetMyColor();
     }
 
+    void SetMyColor()
+    {
+        switch (myColor)
+        {
+            case KeyColor.Red:
+                GetComponent<Renderer>().material = red;
+                myLock.material = red; //proper color of course
+                break;
+            case KeyColor.Green:
+                GetComponent<Renderer>().material = green;
+                myLock.material = green;
+                break;
+            case KeyColor.Gold:
+                GetComponent<Renderer>().material = gold;
+                myLock.material = gold;
+                break;
+        }
+    }
     void Update()
     {
+        if (iCanOpen && isLocked)
+        {
+            GameManager.Instance.SetUseInfo("Press E to open lock"); //<-----
+        }
         if (Input.GetKeyDown(KeyCode.E) && iCanOpen == true && !isLocked)
         {
             key.SetBool("useKey", CheckKey());
@@ -39,6 +69,7 @@ public class Lock : MonoBehaviour
         {
             iCanOpen = false;
             Debug.Log("You can not use this Lock");
+            GameManager.Instance.SetUseInfo("");
         }
     }
 
@@ -55,6 +86,7 @@ public class Lock : MonoBehaviour
         if (GameManager.Instance.redKey > 0 && myColor == KeyColor.Red)
         {
             GameManager.Instance.redKey--;
+            GameManager.Instance.redKeyText.text = GameManager.Instance.redKey.ToString();
             isLocked = true;
             return true;
         }
