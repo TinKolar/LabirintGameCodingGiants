@@ -203,8 +203,18 @@ MonoBehaviour:
   loseClip: {fileID: 8300000, guid: d352c28956d5a3a4f9788431cddc57b9, type: 3}
   musicScript: {fileID: 5025196172083072514}
   volume: {fileID: 0}
-  normalProfile: {fileID: 11400000, guid: 84cea3ce4ef2f6c4db4428f03a6adb5e, type: 2}
+  normalProfile: {fileID: 11400000, guid: 948c18bb58f112b45b233e1336fa4857, type: 2}
   lessTimeProfile: {fileID: 11400000, guid: 7d80e32900c4b2b439d639546983bfb4, type: 2}
+  timeText: {fileID: 0}
+  goldKeyText: {fileID: 0}
+  greenKeyText: {fileID: 0}
+  redKeyText: {fileID: 0}
+  crystalText: {fileID: 0}
+  snowFlake: {fileID: 0}
+  infoPanel: {fileID: 0}
+  pauseEnd: {fileID: 0}
+  reloadInfo: {fileID: 0}
+  useInfo: {fileID: 0}
 --- !u!82 &6434543968620110686
 AudioSource:
   m_ObjectHideFlags: 0

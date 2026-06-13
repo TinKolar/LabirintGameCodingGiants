@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -24,18 +28,35 @@ public class GameManager : MonoBehaviour
     public Volume volume;
     public VolumeProfile normalProfile;
     public VolumeProfile lessTimeProfile;
+
+    public TMP_Text timeText;
+    public TMP_Text goldKeyText;
+    public TMP_Text greenKeyText;
+    public TMP_Text redKeyText;
+    public TMP_Text crystalText;
+    public Image snowFlake;
+
+    public GameObject infoPanel;
+    public TMP_Text pauseEnd;
+    public TMP_Text reloadInfo;
+    public TMP_Text useInfo;
+
+
     public void FreezTime(int freez)
     {
         CancelInvoke("Stopper");
+        snowFlake.enabled = true;
         InvokeRepeating("Stopper", freez, 1);
     }
     public void AddPoints(int point)
     {
         points += point;
+        crystalText.text = points.ToString();
     }
     public void AddTime(int addTime)
     {
         timeToEnd += addTime;
+        timeText.text = timeToEnd.ToString();
     }
     public void AddKey(KeyColor color)
     {
@@ -43,12 +64,15 @@ public class GameManager : MonoBehaviour
         {
             case KeyColor.Red:
                 redKey++;
+                redKeyText.text = redKey.ToString();
                 break;
             case KeyColor.Green:
                 greenKey++;
+                greenKeyText.text = greenKey.ToString();
                 break;
             case KeyColor.Gold:
                 goldKey++;
+                goldKeyText.text = goldKey.ToString();
                 break;
         }
     }
@@ -66,12 +90,38 @@ public class GameManager : MonoBehaviour
         {
             timeToEnd = 100;
         }
+
+        snowFlake.enabled = false;
+        timeText.text=timeToEnd.ToString();
+        infoPanel.SetActive(false);
+        pauseEnd.text = "Pause";
+        reloadInfo.text = "";
+        SetUseInfo("");
+
         LessTimeOff();
         audioSource = GetComponent<AudioSource>();
         InvokeRepeating("Stopper", 2, 1);
     }
+
+    public void SetUseInfo(string v)
+    {
+        useInfo.text=v;
+    }
+
     void Update()
     {
+        if (endGame)
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                SceneManager.LoadScene(0);
+            }
+            if (Input.GetKeyDown(KeyCode.N)) 
+            {
+                Application.Quit();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (gamePaused)
@@ -93,6 +143,8 @@ public class GameManager : MonoBehaviour
     void Stopper()
     {
         timeToEnd--;
+        timeText.text = timeToEnd.ToString();
+        snowFlake.enabled=false;
         //Debug.Log("Time: " + timeToEnd + " s");
         if (timeToEnd <= 0)
         {
@@ -117,6 +169,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         PlayClip(pauseClip);
+        infoPanel.SetActive(true);
         Debug.Log("Pause Game");
         musicScript.OnPauseGame();
         Time.timeScale = 0f;
@@ -125,6 +178,8 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         PlayClip(resumeClip);
+        infoPanel.SetActive(false);
+
         Debug.Log("Resume Game");
         musicScript.OnResumeGame();
         Time.timeScale = 1f;
@@ -133,14 +188,19 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         CancelInvoke("Stopper");
+        infoPanel.SetActive(true);
         if (win)
         {
             PlayClip(winClip);
+            pauseEnd.text = "You Win!!";
+            reloadInfo.text = " Reload? Y/N";
             Debug.Log("You Win!!! Reload?");
         }
         else
         {
             PlayClip(loseClip);
+            pauseEnd.text = "You Lose! :(";
+            reloadInfo.text = " Reload? Y/N";
             Debug.Log("You Lose!!! Reload?");
         }
     }
@@ -165,5 +225,10 @@ public class GameManager : MonoBehaviour
 
         if (volume != null && normalProfile != null)
             volume.profile = normalProfile;
+    }
+    public void WinGame()
+    {
+        win = true;
+        endGame = true;
     }
 }
